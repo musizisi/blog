@@ -10,6 +10,10 @@ title: Chapter 1. Vecoters
 
 ## 1.1 백터 기본
 
+위치 : 변수 x, y
+
+속도 : 변수 xspeed, yspeed
+
 *예제 1-1* 벡터를 사용하지 않고 구현한 튕기는 공 (Bouncing Ball, no vectors)
 ```java
 // 위치와 속도를 나타내는 변수
@@ -28,7 +32,6 @@ void setup() {
 void draw() {
   background(255);
 
-
   // 속도만큼 위치를 이동시킵니다.
   x = x + xspeed;
   y = y + yspeed;
@@ -41,7 +44,6 @@ void draw() {
     yspeed = yspeed * -1;
   }
 
-
   // x, y 위치에 원을 그립니다.
   stroke(0);
   strokeWeight(2);
@@ -52,6 +54,8 @@ void draw() {
 
 
 ## 1.2 프로세싱 프로그래밍과 벡터
+
+[다음 위치] = [현재 위치] + [속도]
 
 ```java
 class PVector {
@@ -102,8 +106,33 @@ void draw() {
   ellipse(location.x,location.y,16,16);
 }
 ```
+연습문제 1-1
+
+연습문제 1-2
+
+연습문제 1-3
+
 
 ## 1.4 벡터와 관련된 수학
+
+- add() : 벡터 덧셈 연산 (add vectors)
+- sub() : 벡터 뺄셈 연산 (subtract vectors)
+- mult() : 벡터 곱셈 연산 (scale the vector with multiplication)
+- div() : 벡터 나눗셈 연산 (scale the vector with division)
+- mag() : 벡터의 크기를 구함 (calculate the magnitude of a vector)
+- setMag() : 벡터의 크기 지정 (set the magnitude of a vector)
+- normalize() : 방향이 같고 단위 길이가 1인 벡터로 설정 (normalize the vector to a unit length of 1)
+- limit() : 백터의 크기가 매개변수로 넣은 최댓값을 넘을 떄 줄임 (limit the magnitude of a vector)
+- heading() : 2차원 벡터의 회전 각도를 구함 (the 2D heading of a vector expressed as an angle)
+- rotate() : 2차원 벡터를 특정 각도만큼 화전 (rotate a 2D vector by an angle)
+- lerp() : 선형 보간법을 사용 (linear interpolate to another vector)
+- dist() : 두 벡터(점)의 유클리드 거리를 구함 (the Euclidean distance between two vectors (considered as points))
+- angleBetween() : 두 벡터의 각도를 구함 (find the angle between two vectors)
+- dot() : 두 벡터를 내적 연산 (the dot product of two vectors)
+- cross() : 두 벡터를 외적 연산 3차원 관련 (the cross product of two vectors (only relevant in three dimensions))
+- random2D() : 임의의 2차원 벡터 생성 (make a random 2D vector)
+- random3D() : 임의의 3차원 벡터 생성 (make a random 3D vector)
+
 
 ### 1.4.1 벡터 뺄셈
 
@@ -134,8 +163,9 @@ void draw() {
 
 ### 1.4.2 벡터 곱셉
 
-*예제 1-4* 벡터 곱셈 (Vector multiplication)
+*예제 1-4* 벡터 곱셈 (Multiplying a vector)
 ```java
+
 void setup() {
   size(640,360);
   smooth();
@@ -191,12 +221,11 @@ void draw() {
 
 ## 1.6 벡터 정규화
 
-*예제 1-6* 벡터의 정규화 (normalizing a vector)
+*예제 1-6* 벡터의 정규화 (Normalizing a vector)
 
 ```java
 
 // Normalizing a vector sets its length to 1.
-
 void setup() {
   size(640,360);
 }
@@ -208,7 +237,8 @@ void draw() {
     PVector mouse = new PVector(mouseX,mouseY);
     // A vector that points to the center of the window
     PVector center = new PVector(width/2,height/2);
-    // Subtract center from mouse which results in a vector that points from center to mouse
+    // Subtract center from mouse which results in a vector
+    // that points from center to mouse
     mouse.sub(center);
 
     // Normalize the vector
@@ -233,7 +263,7 @@ void draw() {
 
 ## 1.7 속도와 벡터를 활용한 이동
 
-*예제 1-7* 속도를 활용한 기본적인 움직임
+*예제 1-7* 속도를 활용한 기본적인 움직임 (Motion 101 (velocity))
 ```java
 
 // Mover 클래스의 변수를 선언합니다.
@@ -302,13 +332,22 @@ class Mover {
 
 가속도`acceleration`는 속도가 변화하는 비율을 의미합니다.
 
-### 1.8.1 가속도 활용 예제
+### 1.8.1 가속도 활용
 
 1. 변하지 않는 값을 가속도로 사용
 2. 랜덤한 값을 가속도로 사용
 3. 마우스를 향하는 가속도를 사용
 
-*예제 1-8* 변하지 않는 값을 가속도로 사용한 움직임
+연습문제 1-4
+ void limit(float max) {
+   if ( > ) {
+     ();
+     limit(max);
+   }
+ }
+
+
+*예제 1-8* 변하지 않는 값을 가속도로 사용한 움직임 (Motion 101 (velocity and constant acceleration))
 ```java
 
 Mover mover;
@@ -382,8 +421,10 @@ class Mover {
 
 ```
 
+연습문제 1-5
 
-*예제 1-9* 임의 값을 가속도로 사용한 움직임
+
+*예제 1-9* 임의 값을 가속도로 사용한 움직임 (Motion 101 (velocity and random acceleration))
 ```java
 
 Mover mover;
@@ -456,4 +497,175 @@ class Mover {
 
 ## 1.9 static 함수
 
+연습문제 1-7
+
+PVector v = new PVector(1, 5);
+PVector u = v.mult(2);
+PVector w = PVector.sub(v, u);
+PVector w = w.div(3);
+
 ## 1.10 가속도와 상호작용
+
+*예제 1-10* 마우스를 향해 가속되는 객체 (Accelerating towards the mouse)
+```java
+// A Mover object
+Mover mover;
+
+void setup() {
+  size(640,360);
+  mover = new Mover();
+}
+
+void draw() {
+  background(255);
+
+  // Update the location
+  mover.update();
+  // Display the Mover
+  mover.display();
+}
+
+
+class Mover {
+
+  // The Mover tracks location, velocity, and acceleration
+  PVector location;
+  PVector velocity;
+  PVector acceleration;
+  // The Mover's maximum speed
+  float topspeed;
+
+  Mover() {
+    // Start in the center
+    location = new PVector(width/2,height/2);
+    velocity = new PVector(0,0);
+    topspeed = 5;
+  }
+
+  void update() {
+
+    // 첫 번째 : 방향을 구합니다.
+    PVector mouse = new PVector(mouseX,mouseY);
+    PVector dir = PVector.sub(mouse,location);
+
+    // 두 번째 : 벡터를 정규화합니다.
+    dir.normalize();
+
+    // 세 번째 : 크기를 조절합니다.
+    dir.mult(0.5);
+
+    // 네 번째 : 가속도를 설정합니다.
+    acceleration = dir;
+
+    // Velocity changes according to acceleration
+    velocity.add(acceleration);
+    // Limit the velocity by topspeed
+    velocity.limit(topspeed);
+    // Location changes by velocity
+    location.add(velocity);
+  }
+
+  void display() {
+    stroke(0);
+    strokeWeight(2);
+    fill(127);
+    ellipse(location.x,location.y,48,48);
+  }
+
+}
+
+
+```
+
+연습문제 1-8
+
+
+*예제 1-11* 마우스를 향해 가속되는 객체들 (Array of movers accelerating towards the mouse)
+```java
+
+// 객체들의 배열
+Mover[] movers = new Mover[20];
+
+void setup() {
+  size(640,360);
+  for (int i = 0; i < movers.length; i++) {
+    // 배열을 초기화힙니다.
+    movers[i] = new Mover();
+  }
+}
+
+void draw() {
+
+  background(255);
+
+  for (int i = 0; i < movers.length; i++) {
+    // 배열 안에 있는 객체의 함수를 호출합니다.
+    movers[i].update();
+    movers[i].checkEdges();
+    movers[i].display();
+  }
+}
+
+
+class Mover {
+
+  // The Mover tracks location, velocity, and acceleration
+  PVector location;
+  PVector velocity;
+  PVector acceleration;
+  // The Mover's maximum speed
+  float topspeed;
+
+  Mover() {
+    // Start in the center
+    location = new PVector(random(width),random(height));
+    velocity = new PVector(0,0);
+    topspeed = 5;
+  }
+
+  // 가속도와 관련된 코드가 들어있는 함수
+  void update() {
+
+    // 마우스를 향하는 벡서를 생성합니다.
+    PVector mouse = new PVector(mouseX,mouseY);
+    PVector dir = PVector.sub(mouse,location);
+    // 벡터를 정규화합니다.
+    acceleration.normalize();
+    // 크기를 변경합니다.
+    acceleration.mult(0.5);
+
+    // 만들어진 벡터를 가속도로 설정합니다.
+    acceleration = dir;
+
+    // 실제로 물체를 움직는 코드입니다.
+    // 가속도로 속도를 변경합니다.
+    velocity.add(acceleration);
+    // 가속도를  topspeed까지 제한합니다.
+    velocity.limit(topspeed);
+    // 속도로 위치를 변경합니다.
+    location.add(velocity);
+  }
+
+  void display() {
+    stroke(0);
+    fill(175);
+    ellipse(location.x,location.y,16,16);
+  }
+
+  void checkEdges() {
+    if (location.x > width) {
+      location.x = 0;
+    } else if (location.x < 0) {
+      location.x = width;
+    }
+
+    if (location.y > height) {
+      location.y = 0;
+    } else if (location.y < 0) {
+      location.y = height;
+    }
+  }
+
+}
+
+```
