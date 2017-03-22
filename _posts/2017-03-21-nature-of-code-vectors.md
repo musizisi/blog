@@ -70,6 +70,25 @@ class PVector {
 
 ## 1.3 벡터 덧셈
 
+```java
+class PVector {
+
+  float x;
+  float y;
+
+  PVector(float x_, float y_) {
+    x = x_;
+    y = y_;
+  }
+
+  void add(PVector v) {
+    y = y + v.y;
+    x = x + v.x;
+  }
+}
+
+```
+
 *예제 1-2* PVector 클래스를 활용한 튕기는 공 (Bouncing Ball, with PVector!)
 
 ```java
@@ -122,7 +141,7 @@ void draw() {
 - mag() : 벡터의 크기를 구함 (calculate the magnitude of a vector)
 - setMag() : 벡터의 크기 지정 (set the magnitude of a vector)
 - normalize() : 방향이 같고 단위 길이가 1인 벡터로 설정 (normalize the vector to a unit length of 1)
-- limit() : 백터의 크기가 매개변수로 넣은 최댓값을 넘을 떄 줄임 (limit the magnitude of a vector)
+- limit() : 백터의 크기가 매개변수로 넣은 최댓값을 넘을 때 줄임 (limit the magnitude of a vector)
 - heading() : 2차원 벡터의 회전 각도를 구함 (the 2D heading of a vector expressed as an angle)
 - rotate() : 2차원 벡터를 특정 각도만큼 화전 (rotate a 2D vector by an angle)
 - lerp() : 선형 보간법을 사용 (linear interpolate to another vector)
@@ -135,6 +154,30 @@ void draw() {
 
 
 ### 1.4.1 벡터 뺄셈
+
+```java
+class PVector {
+
+  float x;
+  float y;
+
+  PVector(float x_, float y_) {
+    x = x_;
+    y = y_;
+  }
+
+  void add(PVector v) {
+    y = y + v.y;
+    x = x + v.x;
+  }
+
+  void sub(PVector v) {
+    x = x - v.x;
+    y = y - v.y;
+  }
+}
+
+```
 
 *예제 1-3* 백터 뺄셈 (Vector subtraction)
 ```java
@@ -163,6 +206,35 @@ void draw() {
 
 ### 1.4.2 벡터 곱셉
 
+```java
+class PVector {
+
+  float x;
+  float y;
+
+  PVector(float x_, float y_) {
+    x = x_;
+    y = y_;
+  }
+
+  void add(PVector v) {
+    y = y + v.y;
+    x = x + v.x;
+  }
+
+  void sub(PVector v) {
+    x = x - v.x;
+    y = y - v.y;
+  }
+
+  void mult(float n) {
+    x = x * n;
+    y = y * n;
+ }
+}
+
+```
+
 *예제 1-4* 벡터 곱셈 (Multiplying a vector)
 ```java
 
@@ -189,6 +261,40 @@ void draw() {
 ```
 
 ## 1.5 벡터 크기
+
+```java
+class PVector {
+
+  float x;
+  float y;
+
+  PVector(float x_, float y_) {
+    x = x_;
+    y = y_;
+  }
+
+  void add(PVector v) {
+    y = y + v.y;
+    x = x + v.x;
+  }
+
+  void sub(PVector v) {
+    x = x - v.x;
+    y = y - v.y;
+  }
+
+  void mult(float n) {
+    x = x * n;
+    y = y * n;
+  }
+
+  float mag() {
+    return sqrt(x*x + y*y);
+  }
+
+}
+
+```
 
 *예제 1-5* 벡터의 크기 (Vector magnitude)
 ```java
@@ -217,9 +323,51 @@ void draw() {
   line(0,0,mouse.x,mouse.y);
 
 }
+
 ```
 
 ## 1.6 벡터 정규화
+
+```java
+class PVector {
+
+  float x;
+  float y;
+
+  PVector(float x_, float y_) {
+    x = x_;
+    y = y_;
+  }
+
+  void add(PVector v) {
+    y = y + v.y;
+    x = x + v.x;
+  }
+
+  void sub(PVector v) {
+    x = x - v.x;
+    y = y - v.y;
+  }
+
+  void mult(float n) {
+    x = x * n;
+    y = y * n;
+  }
+
+  float mag() {
+    return sqrt(x*x + y*y);
+  }
+
+  void normalize() {
+    float m = mag();
+    if (m != 0) {
+      div(m);
+    }
+  }
+
+}
+
+```
 
 *예제 1-6* 벡터의 정규화 (Normalizing a vector)
 
@@ -338,14 +486,16 @@ class Mover {
 2. 랜덤한 값을 가속도로 사용
 3. 마우스를 향하는 가속도를 사용
 
-연습문제 1-4
- void limit(float max) {
-   if ( > ) {
-     ();
-     limit(max);
-   }
- }
+**연습문제 1-4**
+```java
 
+  void limit(float max) {
+    if (magSq() > max*max) {
+      normalize();
+      mult(max);
+    }
+  }
+````
 
 *예제 1-8* 변하지 않는 값을 가속도로 사용한 움직임 (Motion 101 (velocity and constant acceleration))
 ```java
@@ -421,7 +571,106 @@ class Mover {
 
 ```
 
-연습문제 1-5
+**연습문제 1-5**
+```java
+
+Mover mover;
+
+int flag = 2;
+
+void setup() {
+  size(500,500);
+  background(255,255,255);
+  mover = new Mover();
+}
+
+void draw() {
+  background(255,255,255);
+
+  if(flag == 0) {
+    mover.update();
+  }else if(flag == 1) {
+    mover.update2();
+  }else if(flag == 2) {
+    mover.update3();
+  }
+  mover.checkEdges();
+  mover.display();
+}
+
+void keyPressed() {
+  if (key == CODED) {
+    if(keyCode == RIGHT) {
+      flag = 0;
+    }else if(keyCode == LEFT) {
+      flag = 1;
+    }
+  }
+}
+
+void keyReleased() {
+  if (key == CODED) {
+    if(keyCode == RIGHT) {
+      flag = 2;
+    }else if(keyCode == LEFT) {
+      flag = 2;
+    }
+  }
+}
+
+
+//class
+class Mover {
+  PVector location, velocity, acceleration;
+  float topspeed;
+
+  Mover() {
+    location = new PVector(width/2,height/2);
+    velocity = new PVector(0,0);
+    acceleration = new PVector(0.1, 0);
+    topspeed = 100;
+  }
+
+
+  void update() {
+    velocity.add(acceleration);
+    velocity.limit(topspeed);
+    location.add(velocity);
+  }
+
+  void update2() {
+    velocity.sub(acceleration);
+    velocity.limit(topspeed);
+    location.add(velocity);
+  }
+
+  void update3() {  
+    location.add(velocity);
+  }
+
+  void display() {   
+    stroke(0);
+    fill(0,0,0);
+    ellipse(location.x,location.y,10,10);
+  }
+
+  void checkEdges() {
+     if (location.x > width) {
+      location.x = 0;
+    } else if (location.x < 0) {
+      location.x = width;
+    }
+    if (location.y > height) {
+      location.y = 0;
+    } else if (location.y < 0) {
+      location.y = height;
+    }
+
+  }
+
+}
+
+```
 
 
 *예제 1-9* 임의 값을 가속도로 사용한 움직임 (Motion 101 (velocity and random acceleration))
@@ -458,7 +707,7 @@ class Mover {
   void update() {
 
     // PVector 클래스의 random2D() 함수를 사용하면
-    // 임으의 방향을 가진, 길이가 1인 벡터를 얻을 수 있습니다.
+    // 임의의 방향을 가진, 길이가 1인 벡터를 얻을 수 있습니다.
     acceleration = PVector.random2D();
     acceleration.mult(random(2));
 
@@ -498,11 +747,12 @@ class Mover {
 ## 1.9 static 함수
 
 연습문제 1-7
-
+```java
 PVector v = new PVector(1, 5);
 PVector u = v.mult(2);
 PVector w = PVector.sub(v, u);
 PVector w = w.div(3);
+```
 
 ## 1.10 가속도와 상호작용
 
@@ -629,13 +879,15 @@ class Mover {
     // 마우스를 향하는 벡서를 생성합니다.
     PVector mouse = new PVector(mouseX,mouseY);
     PVector dir = PVector.sub(mouse,location);
+
+    // 만들어진 벡터를 가속도로 설정합니다.
+    acceleration = dir;
+
     // 벡터를 정규화합니다.
     acceleration.normalize();
     // 크기를 변경합니다.
     acceleration.mult(0.5);
 
-    // 만들어진 벡터를 가속도로 설정합니다.
-    acceleration = dir;
 
     // 실제로 물체를 움직는 코드입니다.
     // 가속도로 속도를 변경합니다.
