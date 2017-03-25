@@ -397,7 +397,7 @@ void draw() {
     // 벡터의 길이가 유지된다는 것을 확인해주세요.
 
     // Multiply its length by 50
-    mouse.mult(150);
+    mouse.mult(50);
 
     translate(width/2,height/2);
     // Draw the resulting vector
@@ -535,7 +535,7 @@ class Mover {
   }
 
   void update() {
-    // 가속도로 속도를 변경합니다. 그리고 topspeed 벼수로 속도를 제한합니다.
+    // 가속도로 속도를 변경합니다. 그리고 topspeed 변수로 속도를 제한합니다.
     velocity.add(acceleration);
     velocity.limit(topspeed);
     location.add(velocity);
